@@ -1,11 +1,14 @@
 import Zombie from '../zombie';
 
-test('create Zombie', () => {
-  const result = new Zombie('Персонаж');
-  expect(result.name).toBe('Персонаж');
-  expect(result.type).toBe('Zombie');
-  expect(result.attack).toBe(40);
-  expect(result.defence).toBe(10);
-  expect(result.health).toBe(100);
-  expect(result.level).toBe(1);
+test('Правильно создается объект класса Zombie', () => {
+  const zombieChar = new Zombie('Персонаж');
+  const correctStats = {
+    name: 'Персонаж',
+    type: 'Zombie',
+    attack: 40,
+    defence: 10,
+    health: 100,
+    level: 1,
+  };
+  expect(zombieChar).toEqual(correctStats);
 });

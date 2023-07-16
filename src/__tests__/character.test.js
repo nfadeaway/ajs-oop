@@ -1,26 +1,21 @@
 import Character from '../character';
 import Bowman from '../bowman';
 
-test('create char', () => {
-  const heroInputData = {
+test('Правильно создается объект класса Character', () => {
+  const char = new Character('Персонаж', 'Bowman');
+
+  const correctStats = {
     name: 'Персонаж',
     type: 'Bowman',
+    attack: undefined,
+    defence: undefined,
+    health: 100,
+    level: 1,
   };
-
-  const result = new Character(
-    heroInputData.name,
-    heroInputData.type,
-  );
-
-  expect(result.name).toBe('Персонаж');
-  expect(result.type).toBe('Bowman');
-  expect(result.attack).toBe(undefined);
-  expect(result.defence).toBe(undefined);
-  expect(result.health).toBe(100);
-  expect(result.level).toBe(1);
+  expect(char).toEqual(correctStats);
 });
 
-test('bad name, bad type', () => {
+test('Неверное значение поля name, неверное значение поля type при создании объекта класса Character', () => {
   expect(() => {
     const result = new Character('П', 'Bowman');
   }).toThrow();
@@ -32,7 +27,7 @@ test('bad name, bad type', () => {
   }).toThrow();
 });
 
-test('test levelUp with health > 0', () => {
+test('Правильно меняются значения полей health, attack, deffence, level для объектов со значением health > 0 при выполнении levelUp', () => {
   const result = new Bowman('Персонаж');
   result.health = 50;
   result.levelUp();
@@ -42,7 +37,7 @@ test('test levelUp with health > 0', () => {
   expect(result.level).toBe(2);
 });
 
-test('test levelUp with health == 0', () => {
+test('Правильно меняются значения полей health, attack, deffence, level для объектов со значением health === 0 при применении levelUp', () => {
   expect(() => {
     const result = new Bowman('Персонаж');
     result.health = 0;
@@ -50,7 +45,7 @@ test('test levelUp with health == 0', () => {
   }).toThrow();
 });
 
-test('test damage', () => {
+test('Правильно меняется значение поля health при применении damage', () => {
   let result = new Bowman('Персонаж');
   result.damage(10);
   expect(result.health).toBe(92.5);
